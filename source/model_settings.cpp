@@ -17,5 +17,5 @@ const char* kCategoryLabels[kCategoryCount] = {
     "unknown",
     // TODO: copy word list exactly in the order they appear in the training script:
     "yes", "no"
-    //"down", "go", "left", "no", "off", "on", "right", "stop", "up", "yes"
+    // "down", "go", "left", "no", "off", "on", "right", "stop", "up", "yes"
 };

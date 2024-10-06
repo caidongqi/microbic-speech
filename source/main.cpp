@@ -22,12 +22,24 @@ void mic_read(uint8_t *output) {
     uBit.io.runmic.setHighDrive(true); 
     microphone->setGain(7,0);
 
-    uBit.sleep(200);
+    // uBit.sleep(200);
+    microphone->enable();
+    // Important notes: for micro:bit v2, sleep will shut the microphone down!!!!!!!!!
+
+    // 启用连续采样模式
+    // microphone->start();
+
+    // microphone->disable();
+    // uBit.io.runmic.setDigitalValue(0); 
 
     static MemorySink sink(microphone->output, output, kRecordingBytes);
 
     while (!sink.isDone()) {
-        uBit.sleep(200);
+        microphone->enable();
+        uBit.io.runmic.setDigitalValue(1); 
+        uBit.io.runmic.setHighDrive(true); 
+        microphone->setGain(7,0);
+        uBit.sleep(10);
     }
 
     microphone->disable();

@@ -43,12 +43,13 @@ TfLiteStatus AudioInference::invokeTfLite(const int8_t *input_data, uint8_t *mem
     // needed by this graph.
     //
     // static tflite::AllOpsResolver resolver;
-    static tflite::MicroMutableOpResolver<6> resolver(error_reporter);
+    static tflite::MicroMutableOpResolver<7> resolver(error_reporter);
     if (resolver.AddDepthwiseConv2D() != kTfLiteOk ||
         resolver.AddFullyConnected() != kTfLiteOk ||
         resolver.AddSoftmax() != kTfLiteOk ||
         resolver.AddReshape() != kTfLiteOk ||
         resolver.AddConv2D() != kTfLiteOk ||
+        resolver.AddL2Normalization() != kTfLiteOk ||
         resolver.AddMaxPool2D() != kTfLiteOk) {
         error_reporter->Report("Operator registration failed.");
         return kTfLiteError;
